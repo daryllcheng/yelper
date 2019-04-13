@@ -2,39 +2,45 @@ import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
 
-const query = gql`
-  query {
-    search(term: "burrito", location: "san francisco", limit: 5) {
+const RESTURANTS_QUERY = gql`
+  query resturantsQuery($city: String, $term: String) {
+    search(term: $term, location: $city, categories: "Restaurants", limit: 10) {
       total
       business {
         name
-        url
+        alias
+        photos
+        location {
+          city
+        }
+        reviews {
+          text
+          rating
+          time_created
+          url
+        }
       }
     }
   }
 `;
 
-const Resturants = () => {
-  const { data, error, loading } = useQuery(query, {
-    suspend: false
+const Resturants = ({ queries }) => {
+  const { city, term } = queries;
+  const { data, loading } = useQuery(RESTURANTS_QUERY, {
+    variables: { city, term }
   });
 
-  console.log(JSON.stringify(data));
-
   if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error! {error.message}</div>;
+    return <span>Loading...</span>;
   }
 
   return (
     <div>
-      <ul>
-        {data.search.business.map(business => (
-          <li key={business.name}>{business.name}</li>
-        ))}
-      </ul>
+      {data.search.business.map(business => (
+        <div key={business.name}>
+          <span>{`${business.name}: ${business.location.city}`}</span>
+        </div>
+      ))}
     </div>
   );
 };
