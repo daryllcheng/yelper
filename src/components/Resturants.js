@@ -1,4 +1,6 @@
 import React from "react";
+import Resturant from "./Resturant";
+import SwipeableViews from "react-swipeable-views";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
 
@@ -18,6 +20,10 @@ const RESTURANTS_QUERY = gql`
           rating
           time_created
           url
+          user {
+            name
+            image_url
+          }
         }
       }
     }
@@ -30,17 +36,23 @@ const Resturants = ({ queries }) => {
     variables: { city, term }
   });
 
+  console.log(JSON.stringify(data));
+
   if (loading) {
     return <span>Loading...</span>;
   }
 
   return (
     <div>
-      {data.search.business.map(business => (
-        <div key={business.name}>
-          <span>{`${business.name}: ${business.location.city}`}</span>
-        </div>
-      ))}
+      <SwipeableViews
+        enableMouseEvents
+        resistance
+        springConfig={{ tension: 1000, friction: 100 }}
+      >
+        {data.search.business.map(business => (
+          <Resturant key={business.name} business={business} />
+        ))}
+      </SwipeableViews>
     </div>
   );
 };
