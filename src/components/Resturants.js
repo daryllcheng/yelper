@@ -1,5 +1,6 @@
 import React from "react";
 import Resturant from "./Resturant";
+import Spinner from "./Spinner";
 import SwipeableViews from "react-swipeable-views";
 import gql from "graphql-tag";
 import { useQuery } from "react-apollo-hooks";
@@ -12,6 +13,7 @@ const RESTURANTS_QUERY = gql`
         name
         alias
         photos
+        url
         location {
           city
         }
@@ -36,19 +38,13 @@ const Resturants = ({ queries }) => {
     variables: { city, term }
   });
 
-  console.log(JSON.stringify(data));
-
   if (loading) {
-    return <span>Loading...</span>;
+    return <Spinner />;
   }
 
   return (
     <div>
-      <SwipeableViews
-        enableMouseEvents
-        resistance
-        springConfig={{ tension: 1000, friction: 100 }}
-      >
+      <SwipeableViews enableMouseEvents>
         {data.search.business.map(business => (
           <Resturant key={business.name} business={business} />
         ))}

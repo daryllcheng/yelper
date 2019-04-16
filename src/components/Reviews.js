@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 
 import Review from "./Review";
-import StackGrid from "react-stack-grid";
+import styled from "styled-components";
+
+const StyledGrid = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 50px;
+`;
 
 const Reviews = ({ reviews, business }) => {
-  // const [fullReviews, setFullReviews] = useState([]);
-  // const { data, loading } = useQuery(REVIEWS_QUERY, {
-  //   variables: { business }
-  // });
-
-  // console.log(JSON.stringify(data));
-
   return (
-    <StackGrid columnWidth={300}>
+    <StyledGrid>
       {reviews.map(review => (
         <Review review={review} key={review.text} />
       ))}
-    </StackGrid>
+    </StyledGrid>
   );
 };
 

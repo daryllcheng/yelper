@@ -1,6 +1,6 @@
+import Button from "@material-ui/core/Button";
 import { Parallax } from "react-parallax";
 import React from "react";
-import ResturantMap from "./Map";
 import Reviews from "./Reviews";
 
 const insideStyles = {
@@ -8,7 +8,8 @@ const insideStyles = {
   position: "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%,-50%)"
+  transform: "translate(-50%,-50%)",
+  color: "white"
 };
 
 const Resturant = ({ business }) => {
@@ -35,13 +36,12 @@ const Resturant = ({ business }) => {
         )}
       >
         <div style={{ height: 500 }}>
-          <div style={insideStyles}>{`${business.name}: ${
-            business.location.city
-          }`}</div>
+          <a href={business.url} target="_blank">
+            <Button style={insideStyles}>{business.name}</Button>
+          </a>
         </div>
       </Parallax>
       <Reviews reviews={business.reviews} />
-      <ResturantMap />
     </div>
   );
 };

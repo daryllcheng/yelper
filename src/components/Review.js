@@ -11,7 +11,8 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   card: {
-    maxWidth: 345
+    maxWidth: 345,
+    marginBottom: 20
   },
   media: {
     height: 140
@@ -36,11 +37,8 @@ function Review(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+        <Button target="_blank" href={review.url} size="small" color="primary">
+          See More
         </Button>
       </CardActions>
     </Card>
