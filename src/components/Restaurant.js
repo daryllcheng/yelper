@@ -9,21 +9,26 @@ const insideStyles = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%,-50%)",
-  color: "white"
+  color: "white",
+  fontFamily: "'Just Another Hand', cursive",
+  fontSize: "32px"
 };
 
-const Resturant = ({ business }) => {
+const Restaurant = ({ business }) => {
   return (
     <div>
       <Parallax
         bgImage={business.photos[0]}
-        strength={200}
+        bgImageAlt={business.name}
+        bgImageStyle={{ opacity: 0.8 }}
+        strength={-200}
+        blur={{ min: -15, max: 5 }}
         renderLayer={percentage => (
           <div>
             <div
               style={{
                 position: "absolute",
-                background: `rgba(255, 125, 0, ${percentage * 1})`,
+                background: `rgba(255, 125, 0, ${percentage * 1.5})`,
                 left: "50%",
                 top: "50%",
                 borderRadius: "50%",
@@ -46,4 +51,4 @@ const Resturant = ({ business }) => {
   );
 };
 
-export default Resturant;
+export default Restaurant;

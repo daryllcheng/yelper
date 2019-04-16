@@ -1,12 +1,11 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 
-import { ApolloProvider } from "react-apollo";
-import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
+import { RESTAURANTS_QUERY } from "./queries/queries";
+import Restaurants from "./components/Restaurants";
 import ResturantMap from "./components/Map";
 import Search from "./components/Search";
-import client from "./ApolloClient";
-
-const Resturants = React.lazy(() => import("./components/Resturants"));
+import Spinner from "./components/Spinner";
+import { useQuery } from "react-apollo-hooks";
 
 const App = () => {
   const [queries, setQueries] = useState({
@@ -16,16 +15,24 @@ const App = () => {
 
   const [coordinates, setCoordinates] = useState([-122.4376, 37.7577]);
 
+  const { data, loading } = useQuery(RESTAURANTS_QUERY, {
+    variables: { city: queries.city, term: queries.term }
+  });
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
-    <ApolloProvider client={client}>
-      <ApolloProviderHooks client={client}>
-        <Search setQueries={setQueries} setCoordinates={setCoordinates} />
-        <Suspense fallback={<span>Suspense loading...</span>}>
-          <Resturants queries={queries} />
-        </Suspense>
-        <ResturantMap coordinates={coordinates} />
-      </ApolloProviderHooks>
-    </ApolloProvider>
+    <div>
+      <Search
+        queries={queries}
+        setQueries={setQueries}
+        setCoordinates={setCoordinates}
+      />
+      <Restaurants restaurants={data} />
+      <ResturantMap coordinates={coordinates} />
+    </div>
   );
 };
 

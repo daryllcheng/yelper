@@ -20,7 +20,7 @@ const Spinner = () => {
         css={override}
         sizeUnit={"px"}
         size={150}
-        color={"#123abc"}
+        color={"rgba(255, 125, 0, 1)"}
         loading={true}
       />
     </div>

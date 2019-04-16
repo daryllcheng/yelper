@@ -20,18 +20,21 @@ const StyledHeader = styled.form`
 `;
 
 const StyledSpan = styled.span`
-  font-family: Roboto;
+  font-family: "Just Another Hand", cursive;
+  font-size: 32px;
 `;
 
 const styles = theme => ({
   inputCenter: {
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "'Just Another Hand', cursive",
+    fontSize: "32px"
   }
 });
 
-const Search = ({ classes, setQueries, setCoordinates }) => {
-  const [city, setCity] = useState("San Francisco");
-  const [term, setTerm] = useState("Ramen");
+const Search = ({ classes, queries, setQueries, setCoordinates }) => {
+  const [city, setCity] = useState(queries.city);
+  const [term, setTerm] = useState(queries.term);
 
   const getCoordinates = async () => {
     const data = await axios.get(
@@ -58,7 +61,7 @@ const Search = ({ classes, setQueries, setCoordinates }) => {
             input: classes.inputCenter
           }}
           style={{ width: "40%" }}
-          hintText={"Ramen"}
+          hintText={term}
           hintStyle={{ textAlign: "center" }}
         />
         <StyledSpan>in</StyledSpan>
@@ -69,7 +72,7 @@ const Search = ({ classes, setQueries, setCoordinates }) => {
             input: classes.inputCenter
           }}
           style={{ width: "40%" }}
-          hintText={"San Francisco"}
+          hintText={city}
           hintStyle={{ textAlign: "center" }}
         />
       </span>
