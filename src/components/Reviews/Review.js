@@ -23,7 +23,9 @@ function Review(props) {
   const { classes, review } = props;
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea
+        onClick={() => window.open(review.user.profile_url, "_blank")}
+      >
         <CardMedia
           className={classes.media}
           image={review.user.image_url}
