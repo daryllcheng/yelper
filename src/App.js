@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { RESTAURANTS_QUERY } from "./queries/queries";
-import Restaurants from "./components/Restaurants";
+import Restaurants from "./components/Restaurants/Restaurants";
 import ResturantMap from "./components/Map";
 import Search from "./components/Search";
 import Spinner from "./components/Spinner";

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import PropTypes from "prop-types";
+import React from "react";
 import Review from "./Review";
 import styled from "styled-components";
 
@@ -18,6 +18,10 @@ const Reviews = ({ reviews, business }) => {
       ))}
     </StyledGrid>
   );
+};
+
+Reviews.propTypes = {
+  reviews: PropTypes.array.isRequired
 };
 
 export default Reviews;

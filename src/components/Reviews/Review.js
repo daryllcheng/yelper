@@ -46,7 +46,8 @@ function Review(props) {
 }
 
 Review.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  review: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Review);

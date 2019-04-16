@@ -24,6 +24,10 @@ const StyledSpan = styled.span`
   font-size: 32px;
 `;
 
+const StyledInput = styled(Input)`
+  width: 40%;
+`;
+
 const styles = theme => ({
   inputCenter: {
     textAlign: "center",
@@ -54,26 +58,20 @@ const Search = ({ classes, queries, setQueries, setCoordinates }) => {
   return (
     <StyledHeader onSubmit={handleSubmit}>
       <span>
-        <Input
+        <StyledInput
           value={term}
           onChange={e => setTerm(e.target.value)}
           classes={{
             input: classes.inputCenter
           }}
-          style={{ width: "40%" }}
-          hintText={term}
-          hintStyle={{ textAlign: "center" }}
         />
         <StyledSpan>in</StyledSpan>
-        <Input
+        <StyledInput
           value={city}
           onChange={e => setCity(e.target.value)}
           classes={{
             input: classes.inputCenter
           }}
-          style={{ width: "40%" }}
-          hintText={city}
-          hintStyle={{ textAlign: "center" }}
         />
       </span>
       <Button type="submit" />
@@ -82,7 +80,10 @@ const Search = ({ classes, queries, setQueries, setCoordinates }) => {
 };
 
 Search.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  queries: PropTypes.object.isRequired,
+  setQueries: PropTypes.func.isRequired,
+  setCoordinates: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Search);

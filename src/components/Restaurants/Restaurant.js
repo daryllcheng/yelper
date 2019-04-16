@@ -1,25 +1,15 @@
 import Button from "@material-ui/core/Button";
 import { Parallax } from "react-parallax";
+import PropTypes from "prop-types";
 import React from "react";
-import Reviews from "./Reviews";
+import Reviews from "../Reviews/Reviews";
 
-const insideStyles = {
-  padding: 20,
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%,-50%)",
-  color: "white",
-  fontFamily: "'Just Another Hand', cursive",
-  fontSize: "32px"
-};
-
-const Restaurant = ({ business }) => {
+const Restaurant = ({ restaurant }) => {
   return (
     <div>
       <Parallax
-        bgImage={business.photos[0]}
-        bgImageAlt={business.name}
+        bgImage={restaurant.photos[0]}
+        bgImageAlt={restaurant.name}
         bgImageStyle={{ opacity: 0.8 }}
         strength={-200}
         blur={{ min: -15, max: 5 }}
@@ -41,14 +31,31 @@ const Restaurant = ({ business }) => {
         )}
       >
         <div style={{ height: 500 }}>
-          <a href={business.url} target="_blank">
-            <Button style={insideStyles}>{business.name}</Button>
+          <a href={restaurant.url} target="_blank" rel="noopener noreferrer">
+            <Button
+              style={{
+                padding: 20,
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%,-50%)",
+                color: "white",
+                fontFamily: "'Just Another Hand', cursive",
+                fontSize: "32px"
+              }}
+            >
+              {restaurant.name}
+            </Button>
           </a>
         </div>
       </Parallax>
-      <Reviews reviews={business.reviews} />
+      <Reviews reviews={restaurant.reviews} />
     </div>
   );
+};
+
+Restaurant.propTypes = {
+  restaurant: PropTypes.object.isRequired
 };
 
 export default Restaurant;
