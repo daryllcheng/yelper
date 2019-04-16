@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import PropTypes from "prop-types";
+import axios from "axios";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -28,13 +29,23 @@ const styles = theme => ({
   }
 });
 
-const Search = ({ classes, setQueries }) => {
+const Search = ({ classes, setQueries, setCoordinates }) => {
   const [city, setCity] = useState("San Francisco");
   const [term, setTerm] = useState("Ramen");
+
+  const getCoordinates = async () => {
+    const data = await axios.get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURI(
+        city
+      )}.json?types=place&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`
+    );
+    setCoordinates(data.data.features[0].geometry.coordinates);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
     setQueries({ city, term });
+    getCoordinates();
   };
 
   return (
