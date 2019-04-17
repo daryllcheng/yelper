@@ -20,8 +20,6 @@ const App = () => {
     variables: { city: queries.city, term: queries.term }
   });
 
-  console.log(`data: ${JSON.stringify(data)}`);
-
   if (loading) {
     return <Spinner />;
   }
@@ -34,7 +32,10 @@ const App = () => {
         setCoordinates={setCoordinates}
       />
       {Object.entries(data).length === 0 && data.constructor === Object ? (
-        <APIError />
+        <APIError
+          message={`Sorry! We're not able to fetch the restaurants at the moment, please come
+      back later!`}
+        />
       ) : (
         <div>
           <Restaurants restaurants={data} />

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
@@ -16,14 +17,15 @@ const StyledHeader = styled.h1`
   font-weight: 100;
 `;
 
-const APIError = () => (
+const APIError = ({ message }) => (
   <StyledContainer>
-    <StyledHeader>
-      Sorry! We're not able to fetch the restaurants at the moment, please come
-      back later!
-    </StyledHeader>
+    <StyledHeader>{message}</StyledHeader>
     <StyledImg src="/assets/sadBaby.jpg" />
   </StyledContainer>
 );
+
+APIError.propTypes = {
+  message: PropTypes.string.isRequired
+};
 
 export default APIError;
