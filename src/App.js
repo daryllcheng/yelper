@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import APIError from "./components/APIError";
 import { RESTAURANTS_QUERY } from "./queries/queries";
 import Restaurants from "./components/Restaurants/Restaurants";
 import ResturantMap from "./components/Map";
@@ -19,6 +20,8 @@ const App = () => {
     variables: { city: queries.city, term: queries.term }
   });
 
+  console.log(`data: ${JSON.stringify(data)}`);
+
   if (loading) {
     return <Spinner />;
   }
@@ -30,8 +33,14 @@ const App = () => {
         setQueries={setQueries}
         setCoordinates={setCoordinates}
       />
-      <Restaurants restaurants={data} />
-      <ResturantMap coordinates={coordinates} />
+      {Object.entries(data).length === 0 && data.constructor === Object ? (
+        <APIError />
+      ) : (
+        <div>
+          <Restaurants restaurants={data} />
+          <ResturantMap coordinates={coordinates} />
+        </div>
+      )}
     </div>
   );
 };
