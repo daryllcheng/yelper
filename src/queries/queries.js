@@ -5,6 +5,7 @@ export const RESTAURANTS_QUERY = gql`
     search(term: $term, location: $city, categories: "Restaurants", limit: 10) {
       business {
         name
+        alias
         photos
         url
         location {

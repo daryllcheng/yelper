@@ -17,6 +17,7 @@
     "react-apollo": "^2.5.4",
     "react-apollo-hooks": "^0.4.5",
     "react-dom": "^16.8.6",
+    "react-ionicons": "^3.0.1",
     "react-map-gl": "^4.1.2",
     "react-parallax": "^2.2.0",
     "react-scripts": "2.1.8",
