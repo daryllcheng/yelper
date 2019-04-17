@@ -42,7 +42,7 @@ const Restaurants = ({ restaurants }) => {
 
   return (
     <div>
-      {width > 500 && (
+      {width > 770 && (
         <div>
           <StyledLeftSVG
             onClick={() => handlePageChange(index - 1)}
